@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gas.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeRegular">
+                <On Platform="Android" Value="FontAwesome6BrandsRegular400.otf#Regular" />
+                <On Platform="iOS" Value="FontAwesome6BrandsRegular400" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeFreeRegular">
+                <On Platform="Android" Value="FontAwesome6FreeRegular400.otf#FreeRegular" />
+                <On Platform="iOS" Value="FontAwesome6FreeRegular400" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="FontAwesomeFreeSolid">
+                <On Platform="Android" Value="FontAwesome6FreeSolid900.otf#FreeSolid" />
+                <On Platform="iOS" Value="FontAwesome6FreeSolid900" />
+            </OnPlatform>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

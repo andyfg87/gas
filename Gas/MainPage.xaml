@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<FlyoutPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+            xmlns:local="clr-namespace:Gas.Views"
+            x:Class="Gas.MainPage">
+    
+    <FlyoutPage.Flyout>
+        <local:MenuPage x:Name="flyout"/>
+    </FlyoutPage.Flyout>
+
+    <FlyoutPage.Detail>
+        <NavigationPage>
+            <x:Arguments>
+                <local:StartPage Title="Inicio"/>
+            </x:Arguments>
+        </NavigationPage>
+    </FlyoutPage.Detail>
+    <!--TabbedPage.BindingContext>
+        <viewModel:MainViewModel></viewModel:MainViewModel>
+    </TabbedPage.BindingContext-->
+    <!--- xf015  home-->
+    <!--- xf007  user-->
+    
+
+    <!--StackLayout-->
+        <!--customView:CustomToolBarView BackButtonIsVisible="False"
+                                      ToolbarTitle="Gestión de Gas"></customView:CustomToolBarView-->
+        <!--Label Text="&#xf015;" FontFamily="{StaticResource FontAwesomeFreeSolid}" FontSize="Title" TextColor="Black"/-->
+
+    <!--/StackLayout-->
+    <!--local:StartPage/>    
+    <local:ServiceOrderPage/>
+    <local:ClientPage/-->
+    
+
+</FlyoutPage>

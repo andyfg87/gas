@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Gas.Views"
+             x:Class="Gas.Views.MenuPage"
+             Title="Menu">
+    
+        <StackLayout>
+        <ListView x:Name="listView" x:FieldModifier="public">
+            <ListView.ItemsSource>
+                <x:Array Type="{x:Type local:FlyoutItemPage}">
+                    <local:FlyoutItemPage Title="Inicio" IconSource="logo_gas.png" TargetPage="{x:Type local:StartPage}"/>
+                    <local:FlyoutItemPage Title="Clientes" IconSource="costumer_care.png" TargetPage="{x:Type local:ClientPage}"/>
+                    <local:FlyoutItemPage Title="Ordenes de Servicio" IconSource="check_money.png" TargetPage="{x:Type local:ServiceOrderPage}"/>                    
+                </x:Array>
+            </ListView.ItemsSource>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding IconSource}"/>
+                            <Label Grid.Column="1" Text="{Binding Title}" TextColor="Black"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        </StackLayout>
+    
+</ContentPage>

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Gas.Views.ServiceOrderPage"
+             xmlns:viewModel="clr-namespace:Gas.ViewsModels"
+             Title="Order de Servicio"
+             IconImageSource="check_money.png">        
+   
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="Cerrar todas las ordenes" 
+                    HeightRequest="50" WidthRequest="300" 
+                    HorizontalOptions="Center"
+                    CornerRadius="15" 
+                    BackgroundColor="DarkSeaGreen"/>
+            <ListView ItemsSource="{Binding ListServiceOrder}" HasUnevenRows="True" BackgroundColor="WhiteSmoke">
+            <ListView.ItemTemplate>                
+                <DataTemplate>                    
+                    <ViewCell>
+                        <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <Label Text="Entregado" TextTransform="None" 
+                                           BackgroundColor="LawnGreen" HorizontalOptions="Start" TextColor="Crimson" IsVisible="{Binding Delivered}"/>
+                                    <Label LineBreakMode="WordWrap">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding DateProccess, StringFormat='{0:d-M-yyyy}'}" TextColor="Black" FontAttributes="Bold" FontSize="20" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding Text}" FontAttributes="Italic" TextColor="Black"/>
+                                    <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding isVisible}">
+                                        
+                                        <Button Text="Entregado" TextColor="Black" BackgroundColor="GreenYellow" CornerRadius="5" Clicked="Delivered_Clicked"/>
+                                        <Button Text="Eliminar" TextColor="Black" 
+                                                BackgroundColor="Red" CornerRadius="5"
+                                                Clicked="DeleteElement" CommandParameter="{Binding .}"/>
+                                    </StackLayout>                               
+                                </StackLayout>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ShowOrHideButtons_Tapped"
+                                                          CommandParameter="{Binding .}">
+                                        
+                                    </TapGestureRecognizer>
+                                </Frame.GestureRecognizers>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>                    
+            </ListView.ItemTemplate>            
+        </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
