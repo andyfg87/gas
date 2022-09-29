@@ -39,8 +39,8 @@
                             <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                 
                                 <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding Text}" TextColor="Black"/>
-                                    <Label Text="{Binding DateCreated, StringFormat='{0:d-M-yyyy}'}"/>
+                                    <Label Text="{Binding Text}" TextColor="Black" FontAttributes="Bold"/>
+                                    <Label Text="{Binding DateCreated, StringFormat='{0:d-M-yyyy}'}" TextColor="Black" FontAttributes="Italic"/>
                                 </StackLayout>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="UpdateRow_Tapped"
@@ -49,9 +49,9 @@
                                     <SwipeGestureRecognizer Swiped="DeleteRow_Swiped"
                                                             Direction="Right"
                                                             CommandParameter="{Binding .}"></SwipeGestureRecognizer>
-                                    <SwipeGestureRecognizer Swiped="Proccess_Swiped"
-                                                            Direction="Left"
-                                                            CommandParameter="{Binding .}"></SwipeGestureRecognizer>
+                                    <TapGestureRecognizer  Tapped="Proccess_Swiped"                                                           
+                                                            CommandParameter="{Binding .}"
+                                                           NumberOfTapsRequired="2"> </TapGestureRecognizer>
                                 </Frame.GestureRecognizers>
                             </Frame>
                         </ViewCell>

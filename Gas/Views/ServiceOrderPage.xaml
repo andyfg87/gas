@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Gas.Views.ServiceOrderPage"
-             xmlns:viewModel="clr-namespace:Gas.ViewsModels"
+             x:Class="Gas.Views.ServiceOrderPage"             
              Title="Order de Servicio"
              IconImageSource="check_money.png">        
    
@@ -17,8 +16,8 @@
             <ListView.ItemTemplate>                
                 <DataTemplate>                    
                     <ViewCell>
-                        <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0,20,0,0">
                                     <Label Text="Entregado" TextTransform="None" 
                                            BackgroundColor="LawnGreen" HorizontalOptions="Start" TextColor="Crimson" IsVisible="{Binding Delivered}"/>
                                     <Label LineBreakMode="WordWrap">
@@ -29,18 +28,19 @@
                                         </Label.FormattedText>
                                     </Label>
                                     <Label Text="{Binding Text}" FontAttributes="Italic" TextColor="Black"/>
-                                    <StackLayout HorizontalOptions="CenterAndExpand" Orientation="Horizontal" IsVisible="{Binding isVisible}">
+                                    <StackLayout HorizontalOptions="Start" Orientation="Horizontal" IsVisible="{Binding isVisible }">
                                         
                                         <Button Text="Entregado" TextColor="Black" BackgroundColor="GreenYellow" CornerRadius="5" Clicked="Delivered_Clicked"/>
-                                        <Button Text="Eliminar" TextColor="Black" 
-                                                BackgroundColor="Red" CornerRadius="5"
-                                                Clicked="DeleteElement" CommandParameter="{Binding .}"/>
+                                        
                                     </StackLayout>                               
                                 </StackLayout>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="ShowOrHideButtons_Tapped"
-                                                          CommandParameter="{Binding .}">
+                                                          CommandParameter="{Binding .}" NumberOfTapsRequired="1">
                                         
+                                    </TapGestureRecognizer>
+                                    <TapGestureRecognizer Tapped="DeleteElement_Tapped"
+                                                          CommandParameter="{Binding .}" NumberOfTapsRequired="2">
                                     </TapGestureRecognizer>
                                 </Frame.GestureRecognizers>
                         </Frame>

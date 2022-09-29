@@ -15,7 +15,10 @@ namespace Gas.BL
     {
         public async Task<ServiceOrderModel> GetServiceOrder(ServiceOrderModel serviceOrderModel)
         {
-            throw new NotImplementedException();
+            using (GasContext gas = new GasContext())
+            {
+                return await gas.serviceOders.FirstOrDefaultAsync(s => s.Id == serviceOrderModel.Id);
+            }
         }
 
         public async Task<List<ServiceOrderModel>> GetServicesOrders()
@@ -26,12 +29,12 @@ namespace Gas.BL
             }
         }
 
-        public async Task<ServiceOrderModel> GetServicesOrdersInADay(DateTimeOffset date)
+        public Task<ServiceOrderModel> GetServicesOrdersInADay(DateTimeOffset date)
         {
             using (GasContext gas = new GasContext())
             {
-                return gas.serviceOders.ToList().FirstOrDefault(s => s.DateProccess.Day == date.Day &&
-                 s.DateProccess.Month == date.Month && s.DateProccess.Year == date.Year);               
+                return Task.FromResult(gas.serviceOders.ToList().FirstOrDefault(s => s.DateProccess.Day == date.Day &&
+                 s.DateProccess.Month == date.Month && s.DateProccess.Year == date.Year));               
             }
         }        
 
@@ -55,20 +58,18 @@ namespace Gas.BL
 
                 var isModified = tracking.State == EntityState.Modified;
                 return isModified;
-            }
-                return true;
+            }               
         }
 
         public async Task<bool> Delete(ServiceOrderModel serviceOrderModel)
         {
             using (GasContext gas = new GasContext())
             {
-                gas.serviceOders.Remove(serviceOrderModel);
                 ClientModel client = await gas.clients.FirstOrDefaultAsync(c => c.Id == serviceOrderModel.IdClient);
                 client.IsProcess = false;
                 gas.Update(client);
-                await gas.SaveChangesAsync();
-                await gas.DisposeAsync();
+                gas.serviceOders.Remove(serviceOrderModel);             
+                await gas.SaveChangesAsync();               
             }            
                 return true;
         }

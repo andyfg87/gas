@@ -19,10 +19,9 @@ namespace Gas.ViewsModels
         private ObservableCollection<ClientModel> listClientModel;
         
 
-        public ServiceOrderViewModel(INavigation navigation)
-        {
-            Navigation = navigation;
-            LoadList();
+        public ServiceOrderViewModel()
+        {            
+            Task.WaitAny( LoadList());
         }
 
         public ObservableCollection<ServiceOrderModel> ListServiceOrder
@@ -65,13 +64,14 @@ namespace Gas.ViewsModels
         {
             serviceOrderModel.Delivered = true;
             await servicesOrders.Delivered(serviceOrderModel);
-            LoadList();
+            await LoadList();
         }
 
         public async Task Delete(ServiceOrderModel serviceOrderModel)
-        {            
+        {        
+            
             await servicesOrders.Delete(serviceOrderModel);
-            LoadList();
+            await LoadList();
         }
 
         #region COMMANS

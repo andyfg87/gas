@@ -19,10 +19,10 @@ namespace Gas.Views
         public ServiceOrderPage()
         {
             InitializeComponent();
-            BindingContext = vm= new ServiceOrderViewModel(Navigation);
+            BindingContext = vm= new ServiceOrderViewModel();
         }
 
-        private async void ShowOrHideButtons_Tapped(object sender, EventArgs e)
+        private  void ShowOrHideButtons_Tapped(object sender, EventArgs e)
         {
             var container = ((Frame)sender).GestureRecognizers[0];
             ServiceOrderModel serviceOrderModel = ((TapGestureRecognizer)container).CommandParameter as ServiceOrderModel;
@@ -31,10 +31,15 @@ namespace Gas.Views
             vm.ShowHideButtonCommand.Execute(serviceOrderModel);            
         }
 
-        private async void DeleteElement(object sender, EventArgs e)
+        private async void DeleteElement_Tapped(object sender, EventArgs e)
         {
-            var serviceOrderModel = ((Button)sender).BindingContext as ServiceOrderModel;
-            await vm.Delete(serviceOrderModel);
+            var container = ((Frame)sender).GestureRecognizers[0];
+            bool result = await DisplayAlert("Eliminar", "Seguro que desea elminar? Esto pasará visible a clintes ", "Si", "No");
+            if (result)
+            {
+                ServiceOrderModel serviceOrderModel = ((TapGestureRecognizer)container).CommandParameter as ServiceOrderModel;
+                await vm.Delete(serviceOrderModel);
+            }           
 
         }
 
@@ -42,6 +47,6 @@ namespace Gas.Views
         {
             var serviceOrderModel = ((Button)sender).BindingContext as ServiceOrderModel;
             await vm.Delivered(serviceOrderModel);
-        }
+        }       
     }
 }

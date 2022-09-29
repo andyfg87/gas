@@ -25,10 +25,9 @@ namespace Gas.ViewsModels
             set => SetProperty(ref listClient, value);
         }
 
-        public ClientViewModel(INavigation navigation)
-        {
-            Navigation = navigation;
-            LoadListClient();            
+        public ClientViewModel()
+        {            
+            Task.WaitAny( LoadListClient());            
         }
 
         public string Text
@@ -49,25 +48,25 @@ namespace Gas.ViewsModels
             string dateString = DateCreated.ToString();
             await clientsDB.InsertClient(new ClientModel { Text = Text, DateCreated = DateTimeOffset.Parse(dateString)});
             Text = "";
-            LoadListClient();
+            await LoadListClient();
         }
 
         public async Task DeleteClient(ClientModel clientModel)
         {
            await clientsDB.DeleteClient(clientModel);
-            LoadListClient();
+           await LoadListClient();
         }
 
         public async Task UpdateClient(ClientModel client)
         {
             await clientsDB.UpdateClient(client);
-            LoadListClient();
+            await LoadListClient();
         }
 
         public async Task DeleteAll()
         {
             await clientsDB.DeleteAllClient();
-            LoadListClient();
+            await LoadListClient();
         }
 
         public async Task InsertServiceOrder(ClientModel client)
@@ -78,7 +77,7 @@ namespace Gas.ViewsModels
             _ = servicesOrdersDB.Update(serviceOrder);
             client.IsProcess = true;           
             _ = clientsDB.UpdateClient(client);
-            LoadListClient();
+            await LoadListClient();
         }
         
 
@@ -92,7 +91,7 @@ namespace Gas.ViewsModels
             return false;
         }
 
-        public async void LoadListClient()
+        public async Task LoadListClient()
         {
             ListClient = new ObservableCollection<ClientModel>(await clientsDB.GetClients());
         }

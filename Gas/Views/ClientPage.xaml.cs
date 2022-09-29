@@ -18,7 +18,7 @@ namespace Gas.Views
         public ClientPage()
         {
             InitializeComponent();
-            BindingContext = _clientViewModel = new ClientViewModel(Navigation);
+            BindingContext = _clientViewModel = new ClientViewModel();
         }
 
         private async void UpdateRow_Tapped(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace Gas.Views
             }
         }
 
-        private async void Proccess_Swiped(object sender, SwipedEventArgs e)
+        private async void Proccess_Swiped(object sender, EventArgs e)
         {            
             var container = ((Frame)sender).GestureRecognizers[0];
             ClientModel clientModel = ((TapGestureRecognizer)container).CommandParameter as ClientModel;
