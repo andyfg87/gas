@@ -58,14 +58,19 @@ namespace Gas.Views
             }
         }
 
-        private async void Proccess_Swiped(object sender, EventArgs e)
+        private async void Proccess_Tapped(object sender, EventArgs e)
         {            
             var container = ((Frame)sender).GestureRecognizers[0];
-            ClientModel clientModel = ((TapGestureRecognizer)container).CommandParameter as ClientModel;
-            var exist = await _clientViewModel.existServiceOrder(clientModel);
+            ClientModel clientModel = ((TapGestureRecognizer)container).CommandParameter as ClientModel;           
             
             await _clientViewModel.InsertServiceOrder(clientModel);
            
+        }
+
+        private void searchClientBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchBar = _clientViewModel.ListClient.Where(c => c.Text.ToLower().Contains(searchClientBar.Text.ToLower()));
+            clientsList.ItemsSource = searchBar;
         }
     }
 }

@@ -6,7 +6,7 @@
              Title="Menu">
     
         <StackLayout>
-        <ListView x:Name="listView" x:FieldModifier="public">
+        <ListView x:Name="listView" x:FieldModifier="public" BackgroundColor="#24292f">
             <ListView.ItemsSource>
                 <x:Array Type="{x:Type local:FlyoutItemPage}">
                     <local:FlyoutItemPage Title="Inicio" IconSource="logo_gas.png" TargetPage="{x:Type local:StartPage}"/>
@@ -23,7 +23,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Image Source="{Binding IconSource}"/>
-                            <Label Grid.Column="1" Text="{Binding Title}" TextColor="Black"/>
+                            <Label Grid.Column="1" Text="{Binding Title}" TextColor="WhiteSmoke"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

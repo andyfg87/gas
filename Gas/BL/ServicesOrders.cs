@@ -36,7 +36,24 @@ namespace Gas.BL
                 return Task.FromResult(gas.serviceOders.ToList().FirstOrDefault(s => s.DateProccess.Day == date.Day &&
                  s.DateProccess.Month == date.Month && s.DateProccess.Year == date.Year));               
             }
-        }        
+        }
+
+        public   List<ServiceOrderModel> GetServicesOrdersInADate(DateTimeOffset date)
+        {
+            List<ServiceOrderModel> temp = new List<ServiceOrderModel>();
+            using (GasContext gas = new GasContext())
+            {
+                temp.Clear();
+                foreach(var elemt in gas.serviceOders.ToList())
+                {
+                    if (elemt.DateProccess.Year == date.Year && elemt.DateProccess.Month == date.Month && elemt.DateProccess.Day == date.Day)
+                    {
+                        temp.Add(elemt);
+                    }
+                }
+                return  temp;
+            }
+        }
 
         public async Task<ServiceOrderModel> Insert(ServiceOrderModel serviceOrderModel)
         {
@@ -66,8 +83,12 @@ namespace Gas.BL
             using (GasContext gas = new GasContext())
             {
                 ClientModel client = await gas.clients.FirstOrDefaultAsync(c => c.Id == serviceOrderModel.IdClient);
-                client.IsProcess = false;
-                gas.Update(client);
+
+                if (client != null)
+                {
+                    client.IsProcess = false;
+                    gas.Update(client);
+                }                
                 gas.serviceOders.Remove(serviceOrderModel);             
                 await gas.SaveChangesAsync();               
             }            

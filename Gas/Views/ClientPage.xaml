@@ -10,37 +10,39 @@
         <viewModel:ClientViewModel></viewModel:ClientViewModel>
     </ContentPage.BindingContext-->
     <ContentPage.Content>
-        <Grid>            
-            <StackLayout Grid.Row="0"
-                Padding="0,20,0,0">
+        <StackLayout Orientation="Vertical" BackgroundColor="#ffe715">
+            <StackLayout Grid.Row="0" BackgroundColor="#ffe715" Padding="0,20,0,0">
                 <Entry Placeholder="Cliente...." 
-                       Text="{Binding Text}"/>
-                <DatePicker Date="{Binding DateCreated, Mode=TwoWay}">
+                       Text="{Binding Text}" TextColor="#3a6b34"/>
+                <DatePicker Date="{Binding DateCreated, Mode=TwoWay}" TextColor="#3a6b34">
                     <DatePicker.Format>dd/MM/yyyy</DatePicker.Format>
                 </DatePicker>
                 <StackLayout  HorizontalOptions="Start" Orientation="Horizontal">                    
                     <Button Text="Insertar" HorizontalOptions="Start"
-                        BackgroundColor="Green" 
+                        BackgroundColor="#2baf66" 
                         TextTransform="None"
                         CornerRadius="5"
                         Command="{Binding InsertCommand}"    />
-                    <Button Text="Eleminar todos" 
-                            BackgroundColor="DarkRed"
+                    <Button Text="Eleminar todos" HorizontalOptions="End"
+                            BackgroundColor="#cd313e"
                             TextTransform="None"
                             CornerRadius="5"
                             Command="{Binding DeleteAllCommand}"/>
+                    <SearchBar x:Name="searchClientBar"  Placeholder="Buscar Cliente" TextChanged="searchClientBar_TextChanged"/>
                 </StackLayout>
+                
             </StackLayout>
-            <ListView Grid.Row="1" VerticalOptions="Start"
-                      ItemsSource="{Binding ListClient}" HasUnevenRows="True" BackgroundColor="WhiteSmoke">
+            
+            <ListView x:Name="clientsList" Grid.Row="1" VerticalOptions="Start"
+                      ItemsSource="{Binding ListClient}" HasUnevenRows="True" BackgroundColor="#ffe715">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                
-                                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding Text}" TextColor="Black" FontAttributes="Bold"/>
-                                    <Label Text="{Binding DateCreated, StringFormat='{0:d-M-yyyy}'}" TextColor="Black" FontAttributes="Italic"/>
+                            <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#ffe715" CornerRadius="10">
+
+                                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="#ffe715">
+                                    <Label Text="{Binding Text}" TextColor="#3a6b34" FontAttributes="Bold"/>
+                                    <Label Text="{Binding DateCreated, StringFormat='{0:d-M-yyyy}'}" TextColor="#3a6b34" FontAttributes="Italic"/>
                                 </StackLayout>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="UpdateRow_Tapped"
@@ -49,7 +51,7 @@
                                     <SwipeGestureRecognizer Swiped="DeleteRow_Swiped"
                                                             Direction="Right"
                                                             CommandParameter="{Binding .}"></SwipeGestureRecognizer>
-                                    <TapGestureRecognizer  Tapped="Proccess_Swiped"                                                           
+                                    <TapGestureRecognizer  Tapped="Proccess_Tapped"                                                           
                                                             CommandParameter="{Binding .}"
                                                            NumberOfTapsRequired="2"> </TapGestureRecognizer>
                                 </Frame.GestureRecognizers>
@@ -58,6 +60,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

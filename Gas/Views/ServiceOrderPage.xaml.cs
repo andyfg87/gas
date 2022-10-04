@@ -47,6 +47,18 @@ namespace Gas.Views
         {
             var serviceOrderModel = ((Button)sender).BindingContext as ServiceOrderModel;
             await vm.Delivered(serviceOrderModel);
-        }       
+        }
+
+        private void SearchDeliveredBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchBar = vm.ListServiceOrder.Where(c => c.Text.ToLower().Contains(findDeliveredClient.Text.ToLower()) && c.Delivered);
+            serviceOrdersList.ItemsSource = searchBar;
+        }
+
+        private void SearchNotDeliveredBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var searchBar = vm.ListServiceOrder.Where(c => c.Text.ToLower().Contains(findNotDeliveredClient.Text.ToLower()) && !c.Delivered);
+            serviceOrdersList.ItemsSource = searchBar;
+        }
     }
 }

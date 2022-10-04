@@ -67,6 +67,27 @@ namespace Gas.ViewsModels
             await LoadList();
         }
 
+        public async Task CleanServiceOrderInADate()
+        {
+            string dateString = await App.Current.MainPage.DisplayPromptAsync("Fecha(MM/dd/yyyy)", "");
+            if (String.IsNullOrEmpty(dateString))
+            {
+               await App.Current.MainPage.DisplayAlert("ERROR","Debe insertar una fecha en el formato MM/dd/yyyy", "Ok");
+            }
+            else
+            {
+                DateTimeOffset date = DateTimeOffset.Parse(dateString);
+                List<ServiceOrderModel> sericeOrdersTemp =  servicesOrders.GetServicesOrdersInADate(date);
+                
+                foreach (var elemet in sericeOrdersTemp)
+                {
+                    elemet.Delivered = true;
+                    await Task.WhenAny(servicesOrders.Update(elemet));
+                }
+            }
+            await LoadList();
+        }
+
         public async Task Delete(ServiceOrderModel serviceOrderModel)
         {        
             
@@ -77,7 +98,8 @@ namespace Gas.ViewsModels
         #region COMMANS
         public ICommand ShowHideButtonCommand => new Command<ServiceOrderModel> (async (serviceOrderModel) => await ShowHideButtonOfList(serviceOrderModel));
         public ICommand DeleteCommand => new Command<ServiceOrderModel>(async (serviceOrderModel) => await Delete(serviceOrderModel));
-        public ICommand DeliveredCommad => new Command<ServiceOrderModel>( async (serviceOrderModel) => await Delivered(serviceOrderModel)); 
+        public ICommand DeliveredCommad => new Command<ServiceOrderModel>( async (serviceOrderModel) => await Delivered(serviceOrderModel));
+        public ICommand CleanServiceOrderInADateCommand => new Command(async () => await CleanServiceOrderInADate());
         #endregion
     }
 }

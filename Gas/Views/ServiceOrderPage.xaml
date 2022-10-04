@@ -6,33 +6,41 @@
              IconImageSource="check_money.png">        
    
     <ContentPage.Content>
-        <StackLayout>
-            <Button Text="Cerrar todas las ordenes" 
-                    HeightRequest="50" WidthRequest="300" 
+        <StackLayout BackgroundColor="#101920">
+            <StackLayout Padding="0,20,0,10" BackgroundColor="#101920">
+                <Button Text="Cerrar todas las ordenes en una fecha dada"                 
                     HorizontalOptions="Center"
-                    CornerRadius="15" 
-                    BackgroundColor="DarkSeaGreen"/>
-            <ListView ItemsSource="{Binding ListServiceOrder}" HasUnevenRows="True" BackgroundColor="WhiteSmoke">
+                    CornerRadius="5"
+                    TextColor="WhiteSmoke"                    
+                    BackgroundColor="#2baf66"
+                    Command="{Binding CleanServiceOrderInADateCommand}"/>
+                <StackLayout Orientation="Vertical" HorizontalOptions="Start">
+                    <SearchBar x:Name="findDeliveredClient" Placeholder="Entregados" TextColor="WhiteSmoke" PlaceholderColor="WhiteSmoke" TextChanged="SearchDeliveredBar_TextChanged"/>
+                    <SearchBar x:Name="findNotDeliveredClient" Placeholder="Sin Entregar" PlaceholderColor="WhiteSmoke" TextChanged="SearchNotDeliveredBar_TextChanged"/>
+                </StackLayout>
+            </StackLayout>
+
+            <ListView x:Name="serviceOrdersList" ItemsSource="{Binding ListServiceOrder}" HasUnevenRows="True" BackgroundColor="#101920">
             <ListView.ItemTemplate>                
                 <DataTemplate>                    
                     <ViewCell>
-                        <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
-                                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0,20,0,0">
+                            <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" CornerRadius="10" Padding="50,0,50,40" BackgroundColor="#ffe715">
+                                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">                                    
                                     <Label Text="Entregado" TextTransform="None" 
-                                           BackgroundColor="LawnGreen" HorizontalOptions="Start" TextColor="Crimson" IsVisible="{Binding Delivered}"/>
+                                           BackgroundColor="LawnGreen" HorizontalOptions="Start" TextColor="#793937" IsVisible="{Binding Delivered}"/>
                                     <Label LineBreakMode="WordWrap">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="{Binding DateProccess, StringFormat='{0:d-M-yyyy}'}" TextColor="Black" FontAttributes="Bold" FontSize="20" />
+                                                <Span Text="{Binding DateProccess, StringFormat='{0:d-M-yyyy}'}" TextColor="#3a6b34" FontAttributes="Bold" FontSize="20" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    <Label Text="{Binding Text}" FontAttributes="Italic" TextColor="Black"/>
+                                    <Label Text="{Binding Text}"  FontAttributes="Bold" TextColor="#3a6b34"/>
                                     <StackLayout HorizontalOptions="Start" Orientation="Horizontal" IsVisible="{Binding isVisible }">
+
+                                        <Button Text="Entregado" TextColor="WhiteSmoke" BackgroundColor="#101920" CornerRadius="5" Clicked="Delivered_Clicked"/>
                                         
-                                        <Button Text="Entregado" TextColor="Black" BackgroundColor="GreenYellow" CornerRadius="5" Clicked="Delivered_Clicked"/>
-                                        
-                                    </StackLayout>                               
+                                    </StackLayout>                                   
                                 </StackLayout>
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="ShowOrHideButtons_Tapped"
