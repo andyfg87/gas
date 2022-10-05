@@ -63,7 +63,18 @@ namespace Gas.ViewsModels
         public async Task Delivered(ServiceOrderModel serviceOrderModel)
         {
             serviceOrderModel.Delivered = true;
-            await servicesOrders.Delivered(serviceOrderModel);
+            serviceOrderModel.isVisible = false;
+            serviceOrderModel.IsStored = false;
+            await servicesOrders.Update(serviceOrderModel);
+            await LoadList();
+        }
+
+        public async Task Stored(ServiceOrderModel serviceOrderModel)
+        {
+            serviceOrderModel.IsStored = true;
+            serviceOrderModel.Delivered = false;
+            serviceOrderModel.isVisible = false;
+            await servicesOrders.Update(serviceOrderModel);
             await LoadList();
         }
 

@@ -94,14 +94,5 @@ namespace Gas.BL
             }            
                 return true;
         }
-
-        public async Task<bool> Delivered(ServiceOrderModel serviceOrderModel)
-        {
-            using (GasContext gas = new GasContext())
-            {
-                serviceOrderModel.Delivered = true;
-                return await Update(serviceOrderModel);
-            }
-        }
     }
 }

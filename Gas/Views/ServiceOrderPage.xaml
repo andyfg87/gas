@@ -3,8 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Gas.Views.ServiceOrderPage"             
              Title="Order de Servicio"
-             IconImageSource="check_money.png">        
-   
+             xmlns:local="clr-namespace:Gas.Views"
+             IconImageSource="check_money.png">
+    <ContentPage.Resources>
+        <local:DatetimeToStringConverter x:Key="cnvDateTimeConverter"></local:DatetimeToStringConverter>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <StackLayout BackgroundColor="#101920">
             <StackLayout Padding="0,20,0,10" BackgroundColor="#101920">
@@ -16,7 +20,7 @@
                     Command="{Binding CleanServiceOrderInADateCommand}"/>
                 <StackLayout Orientation="Vertical" HorizontalOptions="Start">
                     <SearchBar x:Name="findDeliveredClient" Placeholder="Entregados" TextColor="WhiteSmoke" PlaceholderColor="WhiteSmoke" TextChanged="SearchDeliveredBar_TextChanged"/>
-                    <SearchBar x:Name="findNotDeliveredClient" Placeholder="Sin Entregar" PlaceholderColor="WhiteSmoke" TextChanged="SearchNotDeliveredBar_TextChanged"/>
+                    <SearchBar x:Name="findNotDeliveredClient" Placeholder="Sin Entregar" TextColor="WhiteSmoke" PlaceholderColor="WhiteSmoke" TextChanged="SearchNotDeliveredBar_TextChanged"/>
                 </StackLayout>
             </StackLayout>
 
@@ -28,10 +32,12 @@
                                 <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">                                    
                                     <Label Text="Entregado" TextTransform="None" 
                                            BackgroundColor="LawnGreen" HorizontalOptions="Start" TextColor="#793937" IsVisible="{Binding Delivered}"/>
+                                    <Label Text="Se encuentra en el punto gas" TextTransform="None" 
+                                           BackgroundColor="LawnGreen" HorizontalOptions="Start" TextColor="#793937" IsVisible="{Binding IsStored}"/>
                                     <Label LineBreakMode="WordWrap">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="{Binding DateProccess, StringFormat='{0:d-M-yyyy}'}" TextColor="#3a6b34" FontAttributes="Bold" FontSize="20" />
+                                                <Span Text="{Binding DateProccess, Converter={StaticResource cnvDateTimeConverter}}" TextColor="#3a6b34" FontAttributes="Bold" FontSize="20" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
@@ -39,7 +45,8 @@
                                     <StackLayout HorizontalOptions="Start" Orientation="Horizontal" IsVisible="{Binding isVisible }">
 
                                         <Button Text="Entregado" TextColor="WhiteSmoke" BackgroundColor="#101920" CornerRadius="5" Clicked="Delivered_Clicked"/>
-                                        
+                                        <Button Text="Está en Almacén" TextColor="WhiteSmoke"  BackgroundColor="#3aa5df" CornerRadius="5" Clicked="Stored_Clicked"/>
+
                                     </StackLayout>                                   
                                 </StackLayout>
                                 <Frame.GestureRecognizers>

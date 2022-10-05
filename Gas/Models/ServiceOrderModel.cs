@@ -16,6 +16,7 @@ namespace Gas.Models
         public int IdClient { get; set; }
         public bool isVisible { get; set; }
         public bool Delivered { get; set; }
+        public bool IsStored { get; set; }
 
         
     }

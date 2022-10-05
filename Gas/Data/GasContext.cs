@@ -22,7 +22,7 @@ namespace Gas.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "gas10.db3");
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "gas11.db3");
             optionsBuilder.UseSqlite($"filename={dbPath}");
         }
     }
