@@ -16,12 +16,11 @@ namespace Gas.Views
                 return string.Empty;
 
             
-            var userSelectedCulture = new CultureInfo("es");
+            var userSelectedCulture = new CultureInfo("es-ES");
             var datetime = (DateTimeOffset)value;
-            var convertDate = datetime.Humanize(datetime, userSelectedCulture);
-            //Add my own vocavulary
-            /*convertDate = convertDate.Replace("now", "ahora").Replace("days","días").Replace("day","día").Replace("today","hoy").
-                Replace("minutes ago","minutos").Replace("an hour ago", "un hora atras").Replace("hours","horas").Replace("hour","hora");*/
+            var dateToday = DateTimeOffset.UtcNow;
+            var convertDate = datetime.Humanize(culture: userSelectedCulture);           
+            
             return convertDate;
         }
 

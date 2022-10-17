@@ -30,7 +30,10 @@
                             Command="{Binding DeleteAllCommand}"/>
                     <SearchBar x:Name="searchClientBar"  Placeholder="Buscar Cliente" TextChanged="searchClientBar_TextChanged"/>
                 </StackLayout>
-                
+                <StackLayout Padding="20,0,0,0" Orientation="Horizontal">
+                    <Label Text="Total:" FontAttributes="Bold"/>
+                    <Label Text="{Binding TotalClientWaitingForProccess}" FontAttributes="Bold"/>
+                </StackLayout>                
             </StackLayout>
             
             <ListView x:Name="clientsList" Grid.Row="1" VerticalOptions="Start"

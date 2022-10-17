@@ -31,7 +31,7 @@ namespace Gas.ViewsModels
         }
         public async Task LoadList()
         {
-           ListServiceOrder = new ObservableCollection<ServiceOrderModel>(await servicesOrders.GetServicesOrders());            
+           ListServiceOrder = new ObservableCollection<ServiceOrderModel>(await servicesOrders.GetServicesOrders());           
         }
 
         
@@ -64,8 +64,9 @@ namespace Gas.ViewsModels
         {
             serviceOrderModel.Delivered = true;
             serviceOrderModel.isVisible = false;
-            serviceOrderModel.IsStored = false;
+            serviceOrderModel.IsStored = false;            
             await servicesOrders.Update(serviceOrderModel);
+            oldServiceOrder = serviceOrderModel;
             await LoadList();
         }
 
@@ -75,6 +76,7 @@ namespace Gas.ViewsModels
             serviceOrderModel.Delivered = false;
             serviceOrderModel.isVisible = false;
             await servicesOrders.Update(serviceOrderModel);
+            oldServiceOrder = serviceOrderModel;
             await LoadList();
         }
 

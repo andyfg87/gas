@@ -17,7 +17,14 @@ namespace Gas.ViewsModels
         public ServicesOrders servicesOrdersDB = new ServicesOrders();
         private ObservableCollection<ClientModel> listClient;
         private string _text;
-        private DateTime dateCreated = DateTime.Now;       
+        private DateTime dateCreated = DateTime.Now;
+        public int totalClientWaitingForProccess;
+
+        public int TotalClientWaitingForProccess
+        {
+            get => totalClientWaitingForProccess;
+            set => SetProperty(ref totalClientWaitingForProccess, value);
+        }
 
         public ObservableCollection<ClientModel> ListClient
         {
@@ -55,6 +62,7 @@ namespace Gas.ViewsModels
         {
            await clientsDB.DeleteClient(clientModel);
            await LoadListClient();
+            TotalClientWaitingForProccess = ListClient.Count; 
         }
 
         public async Task UpdateClient(ClientModel client)
@@ -94,6 +102,7 @@ namespace Gas.ViewsModels
         public async Task LoadListClient()
         {
             ListClient = new ObservableCollection<ClientModel>(await clientsDB.GetClients());
+            TotalClientWaitingForProccess = ListClient.Count;
         }
         
         #endregion
