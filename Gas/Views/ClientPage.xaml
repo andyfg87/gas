@@ -31,8 +31,8 @@
                     <SearchBar x:Name="searchClientBar"  Placeholder="Buscar Cliente" TextChanged="searchClientBar_TextChanged"/>
                 </StackLayout>
                 <StackLayout Padding="20,0,0,0" Orientation="Horizontal">
-                    <Label Text="Total:" FontAttributes="Bold"/>
-                    <Label Text="{Binding TotalClientWaitingForProccess}" FontAttributes="Bold"/>
+                    <Label Text="Total:" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="{Binding TotalClientWaitingForProccess}" FontAttributes="Bold" TextColor="Black"/>
                 </StackLayout>                
             </StackLayout>
             
