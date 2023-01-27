@@ -63,6 +63,10 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Ant." Background="#3a6b34" TextColor="Black" />
+                <Button Text="Sig." Background="#3a6b34" TextColor="Black" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

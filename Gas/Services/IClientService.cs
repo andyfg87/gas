@@ -8,7 +8,7 @@ namespace Gas.Services
 {
     public interface IClientService
     {
-        Task<List<ClientModel>> GetClients();
+        Task<List<ClientModel>> GetClients(int page=0);
         Task<ClientModel> GetClient(int idClient);
         Task<bool> InsertClient(ClientModel client);
         Task<bool> UpdateClient(ClientModel client);

@@ -19,6 +19,15 @@ namespace Gas.ViewsModels
         private string _text;
         private DateTime dateCreated = DateTime.Now;
         public int totalClientWaitingForProccess;
+        private int page=0;
+
+
+        public int Page
+        {
+            get => page;
+            set => SetProperty(ref page, value);
+        }
+        
 
         public int TotalClientWaitingForProccess
         {
@@ -100,8 +109,8 @@ namespace Gas.ViewsModels
         }
 
         public async Task LoadListClient()
-        {
-            ListClient = new ObservableCollection<ClientModel>(await clientsDB.GetClients());
+        {            
+            ListClient = new ObservableCollection<ClientModel>(await clientsDB.GetClients(Page));
             TotalClientWaitingForProccess = ListClient.Count;
         }
         

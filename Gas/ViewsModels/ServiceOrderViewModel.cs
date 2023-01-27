@@ -17,6 +17,7 @@ namespace Gas.ViewsModels
         public Clients clients = new Clients();
         private ObservableCollection<ServiceOrderModel> listServiceOrder;
         private ObservableCollection<ClientModel> listClientModel;
+        public string DeliveredWithDate { get; set; }
         
 
         public ServiceOrderViewModel()

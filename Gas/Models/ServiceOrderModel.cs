@@ -17,7 +17,8 @@ namespace Gas.Models
         public bool isVisible { get; set; }
         public bool Delivered { get; set; }
         public bool IsStored { get; set; }
+        public DateTimeOffset DateDelivered { get; set; }
 
-        
+
     }
 }

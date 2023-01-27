@@ -43,11 +43,12 @@ namespace Gas.BL
             }
         }
 
-        public async Task<List<ClientModel>> GetClients()
+        public async Task<List<ClientModel>> GetClients(int page =0)
         {
+            const int PageSize = 4;
             using (GasContext gas = new GasContext() )
             {
-                return await gas.clients.Where(c=> c.IsProcess== false).ToListAsync();
+                return await gas.clients.Skip(page * PageSize).Where(c=> c.IsProcess== false).ToListAsync();
             }
         }
 
